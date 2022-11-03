@@ -20,7 +20,7 @@ class Generator(nn.Module):
                 # Block 2: input is (64 * 8) x 4 x 4
                 ('ConvTranspose2d_2',
                  nn.ConvTranspose2d(64 * 8, 64 * 4, kernel_size=4, stride=2, padding=1)),
-                ('BatchNorm2d_2', nn.BatchNorm2d(64 * 8)),
+                ('BatchNorm2d_2', nn.BatchNorm2d(64 * 4)),
                 ('ReLU_2', nn.ReLU()),
 
                 # Block 3: input is (64 * 4) x 8 x 8

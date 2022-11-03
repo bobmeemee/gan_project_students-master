@@ -15,7 +15,7 @@ class CustomParser:
         self.parser.add_argument('--random_seed', type=int, default=1)
         self.parser.add_argument('--device', type=str, default="gpu")
         self.parser.add_argument('--name', type=str, default="GAN_01")
-        self.parser.add_argument('--dataset_location', default="archive", type=str)
+        self.parser.add_argument('--dataset_location', default="anime_faces", type=str)
         self.parser.add_argument('--save_path', default="experiments/", type=str)
         self.parser.add_argument('--fid', action='store_true')
         self.parser.add_argument('--fid_amount', type=int, help='How many images to generate.', default=1000)

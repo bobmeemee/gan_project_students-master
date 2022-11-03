@@ -87,6 +87,8 @@ for epoch in range(1, config["num_epochs"] + 1):
 
         ## Discriminator real ##
         real_images = real_images.to(device)
+        print(len(real_images))
+        print(real_images)
 
         # TODO: forward through discriminator
         output = discriminator.forward(real_images)

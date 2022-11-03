@@ -69,12 +69,12 @@ class Discriminator(nn.Module):
                 # Block 3: input is (64*2) x 16 x 16
                 ('Conv2d_3', nn.Conv2d(64*2, 64*4, kernel_size=4, stride=2, padding=1)),
                 ('BatchNorm2d_3', nn.BatchNorm2d(64*4)),
-                ('LeakyReLU_3', None),
+                ('LeakyReLU_3', nn.LeakyReLU()),
 
                 # Block 4: input is (64*4) x 8 x 8
                 ('Conv2d_4', nn.Conv2d(64*4, 64*8, kernel_size=4, stride=2, padding=1)),
                 ('BatchNorm2d_4', nn.BatchNorm2d(64*8)),
-                ('LeakyReLU_4', None),
+                ('LeakyReLU_4', nn.LeakyReLU()),
 
                 # Block 5: input is (64*8) x 4 x 4
                 ('Conv2d_5', nn.Conv2d(64*8, 1, kernel_size=4, stride=1, padding=0)),
@@ -84,6 +84,6 @@ class Discriminator(nn.Module):
             ])
         )
 
-    def forward(self, input: torch.Tensor) -> torch.Tensor:
-        output = self.main(input)
+    def forward(self, inp: torch.Tensor) -> torch.Tensor:
+        output = self.main(inp)
         return output

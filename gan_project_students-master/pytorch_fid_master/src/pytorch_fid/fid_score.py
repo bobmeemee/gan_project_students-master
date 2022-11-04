@@ -42,7 +42,6 @@ from PIL import Image
 from pytorch_fid.inception import InceptionV3
 from scipy import linalg
 from torch.nn.functional import adaptive_avg_pool2d
-import tensorflow as tf
 
 try:
     from tqdm import tqdm

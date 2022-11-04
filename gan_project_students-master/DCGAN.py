@@ -105,7 +105,7 @@ for epoch in range(1, config["num_epochs"] + 1):
         # TODO: calculate loss (use the function from utils.py)
         D_fake_loss = discriminator_loss(adversarial_loss, output, fake_target)
         # TODO: backpropagate the loss
-        D_fake_loss.backward()
+        D_fake_loss.backward(retain_graph=True)
 
         # TODO: take a step with the optimizer
         D_optimizer.step()

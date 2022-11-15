@@ -8,13 +8,14 @@ class CustomParser:
         ### TRAINING OPTIONS ###
         self.parser.add_argument('--num_epochs', type=int, default=20)
         self.parser.add_argument('--learning_rate', type=float, default=0.0002)
-        self.parser.add_argument('--batch_size', type=int, default=128)
-        self.parser.add_argument('--latent_dim', type=int, default=100)
+        self.parser.add_argument('--batch_size', type=int, default=32)
+        self.parser.add_argument('--latent_dim', type=int, default=6)
+        self.parser.add_argument('--generator_epoch', type=int, default=1)
 
         ### MISC ###
         self.parser.add_argument('--random_seed', type=int, default=1)
         self.parser.add_argument('--device', type=str, default="gpu")
-        self.parser.add_argument('--name', type=str, default="GAN_01")
+        self.parser.add_argument('--name', type=str, default="GAN_04_latent")
         self.parser.add_argument('--dataset_location', default="anime_faces", type=str)
         self.parser.add_argument('--save_path', default="experiments/", type=str)
         self.parser.add_argument('--fid', action='store_true')

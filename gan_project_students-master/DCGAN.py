@@ -86,46 +86,35 @@ for epoch in range(1, config["num_epochs"] + 1):
         ## Discriminator real ##
         real_images = real_images.to(device)
 
-        # TODO: forward through discriminator
         output = discriminator(real_images)
-        # TODO: calculate loss (use the function from utils.py)
         D_real_loss = discriminator_loss(adversarial_loss, output, real_target)
-        # TODO: backpropagate the loss
         D_real_loss.backward()
 
         ## Discriminator fake ##
-        # TODO: create a noise vector of the correct dimensions
         noise_vector = torch.randn(config["batch_size"], config["latent_dim"], 1, 1, device=device)
-        # TODO: forward the noise vector through the generator
         generated_image = generator.forward(noise_vector)
 
-        # TODO: forward through the discriminator
-        output = discriminator.forward(generated_image)
-        # TODO: calculate loss (use the function from utils.py)
+        output = discriminator.forward(generated_image.detach())
         D_fake_loss = discriminator_loss(adversarial_loss, output, fake_target)
-        # TODO: backpropagate the loss
         D_fake_loss.backward()
 
-        # TODO: take a step with the optimizer
         D_optimizer.step()
 
         # Discriminator tot loss
         D_total_loss = D_real_loss + D_fake_loss
         D_loss_list.append(D_total_loss)
 
-        ## Train G on D's output ##
-        G_optimizer.zero_grad()
-        # TODO: forward generated image through the discriminator
-        gen_output = discriminator.forward(generated_image)
-        # TODO: calculate loss (use the function from utils.py)
-        G_loss = generator_loss(adversarial_loss, gen_output, real_target)
-        G_loss_list.append(G_loss)
+        if epoch % config["generator_epoch"] == 0:
+            ## Train G on D's output ##
+            G_optimizer.zero_grad()
+            gen_output = discriminator.forward(generated_image)
+            G_loss = generator_loss(adversarial_loss, gen_output, real_target)
+            G_loss_list.append(G_loss)
 
-        # TODO: backpropagate the loss
-        G_loss.backward()
+            G_loss.backward()
 
-        # TODO: take a step with the optimizer
-        G_optimizer.step()
+            G_optimizer.step()
+
 
     discr_loss_mean = torch.mean(torch.FloatTensor(D_loss_list)).item()
     gen_loss_mean = torch.mean(torch.FloatTensor(G_loss_list)).item()
